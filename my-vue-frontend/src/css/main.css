@@ -1,0 +1,42 @@
+.title{
+    position: absolute;
+    left:2%;
+    font-size: large;
+    color: #fcf9f9;
+}
+
+.el-header {
+    text-align: right;
+    font-size: 12px;
+    position: relative;
+    background-color: #15be7b95;
+    color: var(--el-text-color-primary);
+}
+
+.toolbar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    right: 20px;
+}
+
+.layout-container-demo .el-aside {
+    color: var(--el-text-color-primary);
+
+}
+
+.layout-container-demo .el-menu {
+    /*border-right: none;*/
+
+}
+
+.layout-container-demo .el-main {
+    padding: 0;
+    background: non;
+}
+
+.image {
+    width: 20%;
+    height: 20%;
+}

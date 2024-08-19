@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <!--更新用户-->
+    <update id="update_user">
+        update user_infor
+        <set>
+            <if test="name!=null and name != ''">
+                name=#{name},
+            </if>
+
+            <if test="age!=null and age != ''">
+                age=#{age},
+            </if>
+
+            <if test="gender!=null and gender !=''">
+                gender=#{gender},
+            </if>
+
+            <if test="phone!=null and phone != ''">
+                phone=#{phone},
+            </if>
+
+            <if test="region!=null and region !=''">
+                region=#{region},
+            </if>
+
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+
+            <if test="dpid!=null and dpid!=''">
+                dpid=#{dpid},
+            </if>
+
+            <if test="birthday!=null">
+                birthday=#{birthday},
+            </if>
+
+            <if test="image!=null and image != ''">
+                image=#{image},
+            </if>
+
+            <if test="username!=null and username != '' and password!=null and password != ''">
+                username = #{username},password=#{password},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--批量删除员工-->
+    <delete id="delete">
+        delete
+        from user_infor
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--分页条件查询-->
+    <select id="page" resultType="com.itheima.pojo.User">
+        select * from user_infor
+        <where>
+            <if test="name!=null and name!=''">
+                name like concat('%',#{name},'%')
+            </if>
+
+            <if test="gender!=null">
+            and gender = #{gender}
+            </if>
+
+
+            <if test="region!=null">
+                and region = #{region}
+            </if>
+
+            <if test="begin!=null">
+                and Date(birthday) &gt;= #{begin}
+            </if>
+
+            <if test="end!=null">
+                and Date(birthday) &lt;= #{end}
+            </if>
+        </where>
+        order by update_time desc
+        limit #{page},#{pageSize};
+    </select>
+
+    <!--根据id批量查询用户-->
+    <select id="get_user_ById" resultType="com.itheima.pojo.User">
+        select *
+        from user_infor
+        where username in
+        <foreach collection="ids" item="username" separator="," open="(" close=")">
+            #{username}
+        </foreach>
+    </select>
+    
+    <select id="list" resultType="com.itheima.pojo.UserUnionDepts">
+        select image,name,gender,age,phone,region,birthday
+            from user_infor
+#             where user_infor.dpid = dept_infor.dpid
+    </select>
+
+    <!--注册，新增用户-->
+    <insert id="add_user">
+        insert into user_infor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            create_time,update_time,
+        <if test="username!=null and username!=''">
+            username,
+        </if>
+        <if test="password!=null and password!=''">
+            password
+        </if>
+       </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{createTime},#{updateTime},
+            <if test="username!=null and username!='' and password!=null and password!=''">
+                #{username},#{password}
+            </if>
+        </trim>
+    </insert>
+</mapper>

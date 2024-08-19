@@ -1,0 +1,51 @@
+#数据库连接信息
+spring:
+  application:
+    name: springboot-mybatis-quickstart
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    url: jdbc:mysql://localhost:3306/my_web
+    username: root
+  servlet:
+    multipart:
+      file-size-threshold: 10MB
+      max-request-size: 100MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎
+  data:
+    redis:
+      host: 127.0.0.1
+      database: 1
+      port: 6379
+      jedis:
+        pool:
+          max-active: 1024
+          max-wait: -1s
+          max-idle: 200
+
+#阿里云OSS配置
+aliyun:
+  oss:
+    accessKeyId: LTAI5tLcYKoR3iaRbttEXmFC
+    accessKeySecret: JegMgj0jHN9W8TYuyc38UNSJWCp3Zl
+    bucketName: web-of-cbz
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+
+#Mybatis配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+#事务日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+#redis配置
+
+
+#配置文件优先级：命令行参数 > java系统属性 > properties > yml > yaml
+
+
