@@ -178,7 +178,7 @@ async function register() {
   }
   if(isCheck==1){
     await axios({
-    url:"http://localhost:8080/users",
+    url:"http://localhost:8080/register",
     method:"POST",
     data:{
       username:registerForm.username,

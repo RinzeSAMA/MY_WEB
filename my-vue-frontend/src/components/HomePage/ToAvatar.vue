@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref,computed } from "vue";
 import { ElMessageBox, ElAlert, ElMessage } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
 import axios from "axios";
@@ -11,6 +11,10 @@ defineProps(["userImage"]);
 var isConfirmed;
 const router = useRouter();
 const store = useStore()
+const headers = computed(() => {
+  const token = localStorage.getItem('token') || '';
+  return { token: token };
+});
 async function beforeAvatarUpload(rawFile){
   if (rawFile.type !== "image/jpeg") {
     ElMessage.error("图片必须是jpg格式!"); //图片必须是jpg格式
@@ -51,7 +55,7 @@ const handleAvatarSuccess = (response) => {
     console.log(response.data);
     updateAvatar(response.data);
     //alert("走到这里了");  
-    router.go(0)
+    //router.go(0)
   }
 };
 
@@ -73,6 +77,8 @@ async function updateAvatar(Image) {
     }
   })
 }
+
+
 </script>
 
 <template>
@@ -84,6 +90,7 @@ async function updateAvatar(Image) {
     :before-upload="beforeAvatarUpload"
     :on-success="handleAvatarSuccess"
     name="image"
+    :headers="headers"
   >
     
     <el-tooltip content="点击更换头像" effect="customized">

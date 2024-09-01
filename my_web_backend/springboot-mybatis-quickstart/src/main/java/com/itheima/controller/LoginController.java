@@ -50,4 +50,11 @@ public class LoginController {
         //登录失败，返回错误信息
         return Result.error("用户名或密码错误！！！");
     }
+
+    @PostMapping("/register")
+    public Result insert(@RequestBody User user){
+        log.info("新增用户：{}",user);
+        userService.add(user);
+        return Result.success();
+    }
 }
