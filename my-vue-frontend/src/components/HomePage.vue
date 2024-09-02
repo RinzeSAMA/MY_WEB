@@ -6,7 +6,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "vue-router";
 import ToAvatar from "../components/HomePage/ToAvatar.vue";
-import { useStore } from 'vuex'
+import { useStore } from "vuex";
 // do not use same name with ref
 const form = reactive({
   name: "",
@@ -25,7 +25,7 @@ function isFormEmpty(form) {
   return true; // 如果所有属性都为空，则返回true，表示表单为空
 }
 const router = useRouter();
-const store = useStore()
+const store = useStore();
 // 修改完成后，提交表单
 async function submit() {
   if (isFormEmpty(form)) {
@@ -65,7 +65,7 @@ async function Init() {
       user = response.data.data[0];
       console.log(user.image);
       isInit.value = true;
-      store.commit('set',user.image)
+      store.commit("set", user.image);
       //alert('初始化成功')
     }
   });
@@ -105,6 +105,16 @@ Init();
           <el-icon :size="20"><Edit /></el-icon>
           编辑个人信息</el-button
         >
+
+        <!-- 关注与被关注板块 -->
+        <span class="col" style="margin-bottom:10%">
+          <el-icon size="20px" style="margin-right: 2%">
+            <UserFilled />
+          </el-icon>
+         0 粉丝·1 关注数
+        </span>
+
+        
         <span class="col" v-if="user.region">
           <el-icon size="20px" style="margin-right: 2%">
             <LocationFilled />
@@ -223,6 +233,7 @@ Init();
   font-size: 15px;
   display: flex;
   align-items: center;
+  justify-items: center;
   margin-bottom: 3%;
 }
 
