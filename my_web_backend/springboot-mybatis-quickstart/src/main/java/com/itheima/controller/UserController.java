@@ -37,7 +37,7 @@ public class UserController {
     /**
      * 根据id删除用户，也可以批量删除
      */
-    //@Log
+    @Log
     @DeleteMapping("/users/{ids}")
     public Result delete(@PathVariable List<Integer> ids){
         log.info("根据接收的id数组批量删除用户");
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     //新增用户(注册)
-    //@Log
+    @Log
     @PostMapping("/users")
     public Result insert(@RequestBody User user){
         log.info("新增用户：{}",user);
@@ -65,7 +65,7 @@ public class UserController {
     }
 
     //修改用户信息
-    //@Log
+    @Log
     @PutMapping("/users")
     public Result update(@RequestBody User user){
 
