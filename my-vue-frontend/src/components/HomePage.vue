@@ -111,7 +111,13 @@ Init();
           <el-icon size="20px" style="margin-right: 2%">
             <UserFilled />
           </el-icon>
-         0 粉丝·1 关注数
+          <el-link :underline="false" href="https://element-plus.org" class="follow-link">
+            <span style="margin-top:3%;font-size:14px;font-weight:bold">0</span>
+            &nbsp;粉丝</el-link>
+          <span style="height:75%;margin-left:5%;margin-right:5%">·</span>
+         <el-link :underline="false" href="https://element-plus.org" class="follow-link">
+          <span style="margin-top:3%;font-size:14px;font-weight:bold">1</span>
+          &nbsp;关注数</el-link>
         </span>
 
         
@@ -236,7 +242,10 @@ Init();
   justify-items: center;
   margin-bottom: 3%;
 }
-
+.follow-link{
+  position: relative;
+  display: flex;
+}
 .username {
   /*box-shadow: 1px 1px 12px 2px rgba(140, 141, 141, 0.493);*/
   position: relative;
