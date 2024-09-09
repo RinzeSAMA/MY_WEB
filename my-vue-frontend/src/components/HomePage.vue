@@ -6,6 +6,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "vue-router";
 import ToAvatar from "../components/HomePage/ToAvatar.vue";
+import Follow from '../components/HomePage/Follow.vue'
 import { useStore } from "vuex";
 // do not use same name with ref
 const form = reactive({
@@ -112,7 +113,7 @@ Init();
             <UserFilled />
           </el-icon>
           <el-link :underline="false" href="https://element-plus.org" class="follow-link">
-            <span style="margin-top:3%;font-size:14px;font-weight:bold">0</span>
+            <span style="margin-top:3%;font-size:14px;font-weight:bold">&nbsp;0</span>
             &nbsp;粉丝</el-link>
           <span style="height:75%;margin-left:5%;margin-right:5%">·</span>
          <el-link :underline="false" href="https://element-plus.org" class="follow-link">
@@ -205,7 +206,13 @@ Init();
         </el-form>
       </div>
     </div>
+    <el-main>
+      <follow></follow>
+    </el-main>
+    
+    
   </el-container>
+  
 </template>
 
 <style scoped>
