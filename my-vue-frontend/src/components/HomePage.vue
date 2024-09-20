@@ -82,8 +82,9 @@ Init();
 <template>
   <el-container class="HomePage">
     <div class="infor" v-if="isInit == true">
+      <!-- 头像板块 -->
       <ToAvatar :userImage="user.image"> </ToAvatar>
-
+      <!-- 个人信息展示 -->
       <div class="showInfor" v-if="showInfor == true">
         <span class="name" v-if="user.name">
           {{ user.name }}
@@ -106,7 +107,6 @@ Init();
           <el-icon :size="20"><Edit /></el-icon>
           编辑个人信息</el-button
         >
-
         <!-- 关注与被关注板块 -->
         <span class="col" style="margin-bottom:10%">
           <el-icon size="20px" style="margin-right: 2%">
@@ -121,7 +121,6 @@ Init();
           &nbsp;关注数</el-link>
         </span>
 
-        
         <span class="col" v-if="user.region">
           <el-icon size="20px" style="margin-right: 2%">
             <LocationFilled />
@@ -143,9 +142,9 @@ Init();
           {{ user.birthday }}
         </span>
       </div>
-
+      <!-- 个人信息编辑板块 -->
       <div class="edit" v-if="showInfor == false">
-        <el-form label-width="100px" size="middle" label-position="top">
+        <el-form label-width="100px" label-position="top">
           <el-form-item label="">
             <el-input v-model="form.name" placeholder="姓名">
               <template #prefix>
@@ -173,6 +172,7 @@ Init();
                 type="date"
                 placeholder="生日"
                 style="width: 100%"
+                value-format="YYYY-MM-DD"
               />
             </el-col>
           </el-form-item>
@@ -206,7 +206,9 @@ Init();
         </el-form>
       </div>
     </div>
+    
     <el-main>
+      <!-- 粉丝关注人展示 -->
       <follow></follow>
     </el-main>
     

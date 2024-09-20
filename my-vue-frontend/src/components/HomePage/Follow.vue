@@ -76,7 +76,7 @@ const list = ref([
   box-sizing: border-box;
   display: flex;
   width: auto;
-  height: 100px;
+  height: 110px;
   margin: 8px auto;
   padding: 16px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 20px;
@@ -100,7 +100,7 @@ const list = ref([
 }
 .region {
   margin-left: 20px;
-  margin-top: 12px;
+  margin-top: 15px;
   font-size: 13px;
   position: relative;
   display: flex;
