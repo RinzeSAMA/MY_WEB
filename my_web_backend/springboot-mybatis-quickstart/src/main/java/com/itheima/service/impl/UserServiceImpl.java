@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<UserUnionDepts> list(){
+    public List<UserUnionDepts> list() {
         return userMapper.list();
     }
 
@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void add(User user) {
-
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         userMapper.add_user(user);
@@ -43,28 +42,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
-
         user.setUpdateTime(LocalDateTime.now());
         userMapper.update_user(user);
     }
 
 
     @Override
-    public PageBean page(Integer page, Integer pageSize,String name, Short gender,String region, LocalDate begin, LocalDate end) {
+    public PageBean page(Integer page, Integer pageSize, String name, Short gender, String region, LocalDate begin, LocalDate end) {
         //1.获取数据库总记录数，当前页面记录数
         Long count = userMapper.count();
         //2.获取分页查询结果
-        Integer start = (page-1)*pageSize;//起始索引
-        List<User> userList = userMapper.page(start,pageSize,name,gender,region,begin,end);
+        Integer start = (page - 1) * pageSize;//起始索引
+        List<User> userList = userMapper.page(start, pageSize, name, gender, region, begin, end);
         Long curcount = (long) userList.size();//获取当前数组长度，即分页的数据量
         //3.封装PageBean对象
-        PageBean pageBean = new PageBean(count,curcount,userList);
+        PageBean pageBean = new PageBean(count, curcount, userList);
         return pageBean;
     }
 
     @Override
     public User login(User user) {
         return userMapper.getByUsernameAndPassword(user);
+    }
+
+    /**
+     *粉丝业务
+     */
+    @Override
+    public List<User> followerList(Integer id) {
+        return userMapper.getFollowers(id);
+    }
+
+    @Override
+    public List<User> followingList(Integer id) {
+        return userMapper.getFollowing(id);
     }
 
 

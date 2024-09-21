@@ -53,5 +53,9 @@ public interface UserMapper {
      */
     @Select("select * from  user_infor where username = #{username} and password = #{password}")
     User getByUsernameAndPassword(User user);
+
+    List<User> getFollowers(Integer id);
+
+    List<User> getFollowing(Integer id);
 }
 

@@ -107,6 +107,22 @@
 #             where user_infor.dpid = dept_infor.dpid
     </select>
 
+    <!--查询粉丝-->
+    <select id="getFollowers" resultType="com.itheima.pojo.User">
+        select name,image,region
+        from user_infor,fans
+        where user_infor.id = fans.subscriber
+        and fans.be_subscribed = #{id}
+    </select>
+
+    <!--查询关注的人-->
+    <select id="getFollowing" resultType="com.itheima.pojo.User">
+        select image,name,region
+        from user_infor,follow
+        where user_infor.id = follow.be_subscribed
+          and follow.subscriber = #{id}
+    </select>
+
     <!--注册，新增用户-->
     <insert id="add_user">
         insert into user_infor

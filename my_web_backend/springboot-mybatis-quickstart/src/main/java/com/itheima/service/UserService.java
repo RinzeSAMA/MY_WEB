@@ -30,4 +30,10 @@ public interface UserService {
     PageBean page(Integer page, Integer pageSize,String name, Short gender,String region, LocalDate begin,LocalDate end);
 
     User login(User user);
+
+    //查询粉丝列表
+    List<User> followerList(Integer id);
+
+    //查询关注的人列表
+    List<User> followingList(Integer id);
 }
