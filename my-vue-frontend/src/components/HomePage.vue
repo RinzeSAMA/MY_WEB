@@ -112,7 +112,7 @@ Init();
           <el-icon size="20px" style="margin-right: 2%">
             <UserFilled />
           </el-icon>
-          <el-link :underline="false" href="https://element-plus.org" class="follow-link">
+          <el-link :underline="false" class="follow-link">
             <span style="margin-top:3%;font-size:14px;font-weight:bold">&nbsp;0</span>
             &nbsp;粉丝</el-link>
           <span style="height:75%;margin-left:5%;margin-right:5%">·</span>

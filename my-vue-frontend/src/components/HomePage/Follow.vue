@@ -1,38 +1,30 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
+const user = jwtDecode(localStorage.getItem("token"));
 const list = ref([
   {
     name: "陈秉正",
-    avatar:
+    image:
       "https://web-of-cbz.oss-cn-beijing.aliyuncs.com/7bb67936-724d-49fb-ba3c-135673778350.jpg",
     region: "中国",
   },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
-  {
-    name: "陈秉正",
-  },
 ]); /*渲染关注列表*/
+
+async function getFans() {
+  await axios({
+    url: `http://localhost:8080/followers/${user.id}`,
+    method: "GET",
+  }).then((response) => {
+    if (response.data.code == 1) {
+      list.value = response.data.data
+    }
+  });
+}
+console.log(user)
+getFans()
 </script>
 
 <template>
@@ -40,7 +32,7 @@ const list = ref([
     <div class="follow">
         <span class="title">只展示最近2000名关注者</span>
       <div v-for="(item, index) in list" class="item">
-        <el-avatar :src="item.avatar" :size="60" class="avater" />
+        <el-avatar :src="item.image" :size="60" class="avater" />
         <div class="infor">
           <span class="name">{{ item.name + " " }}</span>
           <span class="region" v-if="item.region">
