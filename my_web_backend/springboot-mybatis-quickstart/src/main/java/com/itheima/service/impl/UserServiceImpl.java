@@ -78,5 +78,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.getFollowing(id);
     }
 
+    @Override
+    public Long countOfFollowing(Integer id) {
+        return userMapper.countOfFollowing(id);
+    }
+
+    @Override
+    public Long countOfFollowers(Integer id) {
+        return userMapper.countOfFollowers(id);
+    }
 
 }

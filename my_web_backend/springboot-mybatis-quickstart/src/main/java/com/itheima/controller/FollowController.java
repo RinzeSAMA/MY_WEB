@@ -19,7 +19,7 @@ public class FollowController {
     private UserService userService;
 
     /**
-     * 查询粉丝
+     * 查询粉丝列表
      */
     @GetMapping("/followers/{id}")
     public Result follower(@PathVariable Integer id){
@@ -29,12 +29,32 @@ public class FollowController {
     }
 
     /**
-     * 查询关注的人
+     * 查询关注的人列表
      */
     @GetMapping("/following/{id}")
     public Result following(@PathVariable Integer id){
         log.info("查询关注的人列表");
         List<User> userlist = userService.followingList(id);
         return Result.success(userlist);
+    }
+
+    /**
+     * 查询关注的人数量
+     */
+    @GetMapping("/countOfFollowing/{id}")
+    public Result countOfFollowing(@PathVariable Integer id){
+        log.info("查询关注的人列表");
+        Long count = userService.countOfFollowing(id);
+        return Result.success(count);
+    }
+
+    /**
+     * 查询粉丝数量
+     */
+    @GetMapping("/countOfFollowers/{id}")
+    public Result countOfFollowers(@PathVariable Integer id){
+        log.info("查询粉丝列表");
+        Long count = userService.countOfFollowers(id);
+        return Result.success(count);
     }
 }

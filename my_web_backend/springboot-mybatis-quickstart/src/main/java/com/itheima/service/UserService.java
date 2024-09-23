@@ -36,4 +36,8 @@ public interface UserService {
 
     //查询关注的人列表
     List<User> followingList(Integer id);
+
+    Long countOfFollowing(Integer id);
+
+    Long countOfFollowers(Integer id);
 }

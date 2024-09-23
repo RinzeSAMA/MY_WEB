@@ -57,5 +57,17 @@ public interface UserMapper {
     List<User> getFollowers(Integer id);
 
     List<User> getFollowing(Integer id);
+
+    @Select("select count(*)\n" +
+            "from user_infor,follow\n" +
+            "where user_infor.id = follow.subscriber\n" +
+            "and user_infor.id=#{id}")
+    Long countOfFollowing(Integer id);
+
+    @Select("select count(*) as fans\n" +
+            "from user_infor,fans\n" +
+            "where user_infor.id = fans.be_subscribed\n" +
+            "and user_infor.id=#{id}")
+    Long countOfFollowers(Integer id);
 }
 
