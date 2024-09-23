@@ -5,17 +5,14 @@ import { jwtDecode } from "jwt-decode";
 
 const user = jwtDecode(localStorage.getItem("token"));
 const list = ref([
-  {
-    name: "陈秉正",
-    image:
-      "https://web-of-cbz.oss-cn-beijing.aliyuncs.com/7bb67936-724d-49fb-ba3c-135673778350.jpg",
-    region: "中国",
-  },
-]); /*渲染关注列表*/
+]); /*渲染关注者列表*/
 
-async function getFans() {
+async function unfollow() {
+    
+}
+async function getFollowing() {
   await axios({
-    url: `http://localhost:8080/followers/${user.id}`,
+    url: `http://localhost:8080/following/${user.id}`,
     method: "GET",
   }).then((response) => {
     if (response.data.code == 1) {
@@ -24,7 +21,7 @@ async function getFans() {
   });
 }
 console.log(user)
-getFans()
+getFollowing()
 </script>
 
 <template>
@@ -44,7 +41,7 @@ getFans()
         </div>
 
         <el-button
-          @click="del(item.dpid)"
+          @click="unfollow()"
           type="info"
           plain
           class="cancel-button"

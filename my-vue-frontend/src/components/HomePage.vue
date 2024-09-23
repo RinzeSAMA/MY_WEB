@@ -6,7 +6,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "vue-router";
 import ToAvatar from "../components/HomePage/ToAvatar.vue";
-import Follow from '../components/HomePage/Follow.vue'
+import Followers from "../components/HomePage/Followers.vue";
+import Following from "../components/HomePage/Following.vue";
 import { useStore } from "vuex";
 // do not use same name with ref
 const form = reactive({
@@ -27,6 +28,7 @@ function isFormEmpty(form) {
 }
 const router = useRouter();
 const store = useStore();
+
 // 修改完成后，提交表单
 async function submit() {
   if (isFormEmpty(form)) {
@@ -65,17 +67,46 @@ async function Init() {
     if (response.data.code == 1) {
       user = response.data.data[0];
       console.log(user.image);
+      getCountOfFans()
+      getCountOfFollowing()
       isInit.value = true;
       store.commit("set", user.image);
       //alert('初始化成功')
     }
   });
+  
 }
 let user;
+const fans = ref(0);
+const following = ref(0);
 let isInit = ref(false);
 let showInfor = ref(true);
 const infor = jwtDecode(localStorage.getItem("token"));
 Init();
+
+//查询粉丝数量
+async function getCountOfFans() {
+  await axios({
+    url:`http://localhost:8080/countOfFollowers/${infor.id}`,
+    method:'GET',
+  }).then((response)=>{
+    if(response.data.code==1){
+      fans.value = response.data.data
+    }
+  })
+}
+
+//查询关注的人数量
+async function getCountOfFollowing() {
+  await axios({
+    url:`http://localhost:8080/countOfFollowing/${infor.id}`,
+    method:'GET',
+  }).then((response)=>{
+    if(response.data.code==1){
+      following.value = response.data.data
+    }
+  })
+}
 /**************************************/
 </script>
 
@@ -108,17 +139,27 @@ Init();
           编辑个人信息</el-button
         >
         <!-- 关注与被关注板块 -->
-        <span class="col" style="margin-bottom:10%">
+        <span class="col" style="margin-bottom: 15%">
           <el-icon size="20px" style="margin-right: 2%">
             <UserFilled />
           </el-icon>
-          <el-link :underline="false" class="follow-link">
-            <span style="margin-top:3%;font-size:14px;font-weight:bold">&nbsp;0</span>
-            &nbsp;粉丝</el-link>
-          <span style="height:75%;margin-left:5%;margin-right:5%">·</span>
-         <el-link :underline="false" href="https://element-plus.org" class="follow-link">
-          <span style="margin-top:3%;font-size:14px;font-weight:bold">1</span>
-          &nbsp;关注数</el-link>
+          <el-link :underline="false" class="follow-link" @click="router.push('/followers')">
+            <span style="margin-top: 3%; font-size: 14px; font-weight: bold"
+              >&nbsp; {{fans}}</span
+            >
+            &nbsp;粉丝</el-link
+          >
+          <span style="height: 75%; margin-left: 5%; margin-right: 5%">·</span>
+          <el-link
+            :underline="false"
+            class="follow-link"
+            @click="router.push('/following')"
+          >
+            <span style="margin-top: 3%; font-size: 14px; font-weight: bold"
+              >{{following}}</span
+            >
+            &nbsp;关注数</el-link
+          >
         </span>
 
         <span class="col" v-if="user.region">
@@ -206,15 +247,14 @@ Init();
         </el-form>
       </div>
     </div>
-    
+
     <el-main>
       <!-- 粉丝关注人展示 -->
-      <follow></follow>
+       <router-view>
+       </router-view>
+      <!-- <follow></follow> -->
     </el-main>
-    
-    
   </el-container>
-  
 </template>
 
 <style scoped>
@@ -251,7 +291,7 @@ Init();
   justify-items: center;
   margin-bottom: 3%;
 }
-.follow-link{
+.follow-link {
   position: relative;
   display: flex;
 }

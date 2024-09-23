@@ -29,7 +29,19 @@ const routes = [
             {
                 path:'homePage',
                 name:'HomePage',
-                component:()=>import('../components/HomePage.vue')
+                component:()=>import('../components/HomePage.vue'),
+                children:[
+                    {
+                        path:'/following',
+                        name:'Following',
+                        component:()=>import('../components/HomePage/Following.vue')
+                    },
+                    {
+                        path:'/followers',
+                        name:'Followers',
+                        component:()=>import('../components/HomePage/Followers.vue')
+                    }
+                ]
             },
             {
                 path:'user_table',
