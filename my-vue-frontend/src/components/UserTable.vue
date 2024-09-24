@@ -77,6 +77,10 @@ async function get_List_of_Users() {
 </template>
 
 <style scoped>
+
+.table{
+    margin-top:3%;
+}
 .image {
     width: 20%;
     height: 20%;

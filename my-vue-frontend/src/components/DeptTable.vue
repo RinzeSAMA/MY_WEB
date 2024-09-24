@@ -66,3 +66,9 @@ async function get_List_of_Depts() {
         </el-main>
     </el-container>
 </template>
+
+<style scoped>
+.table{
+    margin-top:3%;
+}
+</style>

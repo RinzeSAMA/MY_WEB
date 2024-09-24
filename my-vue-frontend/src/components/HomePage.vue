@@ -9,6 +9,7 @@ import ToAvatar from "../components/HomePage/ToAvatar.vue";
 import Followers from "../components/HomePage/Followers.vue";
 import Following from "../components/HomePage/Following.vue";
 import { useStore } from "vuex";
+
 // do not use same name with ref
 const form = reactive({
   name: "",
@@ -26,8 +27,6 @@ function isFormEmpty(form) {
   }
   return true; // 如果所有属性都为空，则返回true，表示表单为空
 }
-const router = useRouter();
-const store = useStore();
 
 // 修改完成后，提交表单
 async function submit() {
@@ -71,11 +70,13 @@ async function Init() {
       getCountOfFollowing()
       isInit.value = true;
       store.commit("set", user.image);
-      //alert('初始化成功')
+      
     }
   });
   
 }
+const router = useRouter();
+const store = useStore();
 let user;
 const fans = ref(0);
 const following = ref(0);
@@ -145,7 +146,7 @@ async function getCountOfFollowing() {
           </el-icon>
           <el-link :underline="false" class="follow-link" @click="router.push('/followers')">
             <span style="margin-top: 3%; font-size: 14px; font-weight: bold"
-              >&nbsp; {{fans}}</span
+              >&nbsp;{{fans}}</span
             >
             &nbsp;粉丝</el-link
           >
