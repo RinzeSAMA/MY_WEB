@@ -1,6 +1,7 @@
 package com.itheima.controller;
 
 import com.aliyun.oss.AliOSSUtils;
+import com.itheima.annotation.Log;
 import com.itheima.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class UploadController {
 
         return Result.success();
     }*/
+    @Log
     @PostMapping("/upload")
     public Result upload(MultipartFile image) throws IOException {
         log.info("文件上传，文件名：{}",image.getOriginalFilename());
