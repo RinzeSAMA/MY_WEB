@@ -14,10 +14,10 @@ public class RedisConfig {
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
         RedisTemplate<String,Object> template = new RedisTemplate<String,Object>();
         template.setConnectionFactory(redisConnectionFactory);
-        //key采用String的序列化方式
+        //key采用String的序列化方式,value采用Json序列化方式
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        template.setHashKeySerializer(new GenericJackson2JsonRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         template.afterPropertiesSet();
         return template;
