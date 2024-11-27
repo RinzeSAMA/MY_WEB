@@ -9,7 +9,7 @@ import java.util.Map;
 public class JwtUtils {
 
     private static String signKey = "itheima";
-    private static Long expire = 43200000L;
+    private static Long expire = 7200000L;
 
     /**
      * 生成JWT令牌
@@ -20,7 +20,7 @@ public class JwtUtils {
         String jwt = Jwts.builder()
                 .addClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, signKey)
-                .setExpiration(new Date(System.currentTimeMillis() + expire))
+                .setExpiration(new Date(System.currentTimeMillis() + expire))//2小时过期时间，实际为逻辑过期时间（当前时间+2小时的时间戳），过期了就要重新登录
                 .compact();
         return jwt;
     }
