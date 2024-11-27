@@ -5,7 +5,6 @@ import com.itheima.pojo.User;
 import com.itheima.pojo.VerifyCode;
 import com.itheima.service.UserService;
 import com.itheima.utils.JwtUtils;
-import com.itheima.utils.redis.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
